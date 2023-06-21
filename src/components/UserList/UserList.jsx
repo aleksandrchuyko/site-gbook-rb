@@ -1,95 +1,48 @@
-
-import { useState } from 'react';
 import { User } from 'components/UserList/User/User';
 import PropTypes from 'prop-types';
-import { Container, ListGroup } from 'react-bootstrap';
-
-
-
-
-function getFamilyName(name) {
-  return name;
-}
-
-const FamilyNameSorter = {
-  desc: (data, key) => {
-    var result = data.sort(function (_a, _b) {
-      const a = getFamilyName(_a[key]);
-      const b = getFamilyName(_b[key]);
-      if (a <= b) {
-        return 1;
-      } else if (a > b) {
-        return -1;
-      }
-    });
-    return result;
-  },
-
-  asc: (data, key) => {
-    return data.sort(function (_a, _b) {
-      const a = getFamilyName(_a[key]);
-      const b = getFamilyName(_b[key]);
-      if (a >= b) {
-        return 1;
-      } else if (a < b) {
-        return -1;
-      }
-    });
-  },
-};
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import BootstrapTable from 'react-bootstrap-table-next';
+import { VisitorContainer } from './UserList.styled';
 
 export const UserList = ({ users, open, getUserById }) => {
-  const data = [
-    { id: 3, name: 'Satoshi Yamamoto', class: 'B' },
-    { id: 1, name: 'Taro Tanak', class: 'A' },
-    { id: 2, name: 'Ken Asada', class: 'A' },
-    { id: 4, name: 'Masaru Tokunaga', class: 'C' },
-  ];
   const columns = [
     {
-      header: 'ID',
-      key: 'id',
-      defaultSorting: 'ASC',
-      headerStyle: {
-        fontSize: '15px',
-        backgroundColor: '#FFDAB9',
-        width: '100px',
-      },
-      dataStyle: { fontSize: '15px', backgroundColor: '#FFDAB9' },
-      dataProps: { className: 'align-right' },
-      render: id => {
-        return <a href={'user/' + id}>{id}</a>;
-      },
+      dataField: 'id',
+      text: 'Visitor ID',
+      hidden: true,
     },
     {
-      header: 'NAME',
-      key: 'name',
-      headerStyle: { fontSize: '15px' },
-      headerProps: { className: 'align-left' },
-      descSortFunction: FamilyNameSorter.desc,
-      ascSortFunction: FamilyNameSorter.asc,
+      dataField: 'name',
+      text: 'Name',
+      sort: true,
     },
     {
-      header: 'CLASS',
-      key: 'class',
-      headerStyle: { fontSize: '15px' },
-      sortable: false,
+      dataField: 'email',
+      text: 'Email',
+      sort: true,
     },
   ];
 
-  const style = {
-    backgroundColor: '#eee',
-  };
-
-  const iconStyle = {
-    color: '#aaa',
-    paddingLeft: '5px',
-    paddingRight: '5px',
-  };
+  const visitors = users.map(user => {
+    return {
+      id: user._id,
+      name: (
+        <User
+          id={user._id}
+          name={user.name}
+          email={user.email}
+          password={user.password}
+          open={open}
+          getUserById={getUserById}
+        ></User>
+      ),
+      email: user.email,
+    };
+  });
 
   return (
-    <Container>
-      
+    <VisitorContainer>
+      <BootstrapTable keyField="id" data={visitors} columns={columns} />
       {/* <ListGroup variant="flush">
         {users.map(user => (
           <ListGroup.Item key={user._id}>
@@ -104,7 +57,7 @@ export const UserList = ({ users, open, getUserById }) => {
           </ListGroup.Item>
         ))}
       </ListGroup> */}
-    </Container>
+    </VisitorContainer>
   );
 };
 
