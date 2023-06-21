@@ -47,7 +47,7 @@ export const UserForm = ({ users, onSubmit }) => {
     <Box>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-2" controlId="formBasicName">
-          <Form.Label>ПІБ студента</Form.Label>
+          <Form.Label>Name</Form.Label>
           <Form.Control
             type="text"
             name="name"
@@ -60,31 +60,19 @@ export const UserForm = ({ users, onSubmit }) => {
           />
         </Form.Group>
         <Form.Group className="mb-2" controlId="formBasicEmail">
-          <Form.Label>Email студента</Form.Label>
-          <Form.Control
-            type="mail"
-            name="email"
-            value={email}
-            onChange={handleChange}
-            pattern="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"
-            autoComplete='off'
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-2" controlId="formBasicPassword">
-          <Form.Label>Паспорт студента</Form.Label>
+          <Form.Label>Surname</Form.Label>
           <Form.Control
             type="text"
-            name="password"
-            minLength="8"
-            value={password}
+            name="surname"
+            value={email}
             onChange={handleChange}
+            pattern="^[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]+(([' -][a-zA-Zа-яА-Яа-їґЄ-ЯҐ ])?[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]*)*$"
             autoComplete='off'
             required
           />
         </Form.Group>
         <Button variant="primary" type="submit">
-          Додати в базу
+          Add
         </Button>
       </Form>
     </Box>
