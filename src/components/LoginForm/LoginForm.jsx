@@ -5,14 +5,14 @@ import { authOperations } from 'redux/auth';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 
 export const LoginForm = () => {
-  const [surname, setSurname] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
 
   const handleChange = ({ currentTarget: { name, value } }) => {
     switch (name) {
-      case 'surname':
-        setSurname(value);
+      case 'email':
+        setEmail(value);
         break;
       case 'password':
         setPassword(value);
@@ -25,8 +25,8 @@ export const LoginForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    dispatch(authOperations.logIn({ surname, password }));
-    setSurname('');
+    dispatch(authOperations.logIn({ email, password }));
+    setEmail('');
     setPassword('');
   };
 
@@ -36,13 +36,13 @@ export const LoginForm = () => {
         <Col xs={6}>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicSurname">
-              <Form.Label>Surname address</Form.Label>
+              <Form.Label>Email address</Form.Label>
 
               <Form.Control
-                type="surname"
-                placeholder="Enter surname"
-                name="surname"
-                value={surname}
+                type="email"
+                placeholder="Enter email"
+                name="email"
+                value={email}
                 onChange={handleChange}
                 required
               />

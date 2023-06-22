@@ -5,15 +5,15 @@ import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import { authOperations } from 'redux/auth';
 
 export const RegisterForm = () => {
-  const [surname, setSurname] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
 
   const handleChange = ({ currentTarget: { name, value } }) => {
     switch (name) {
-      case 'surname':
-        setSurname(value);
+      case 'email':
+        setEmail(value);
         break;
       case 'password':
         setPassword(value);
@@ -25,9 +25,9 @@ export const RegisterForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(authOperations.register({ surname, password }));
+    dispatch(authOperations.register({ email, password }));
 
-    setSurname('');
+    setEmail('');
     setPassword('');
   };
 
@@ -39,10 +39,10 @@ export const RegisterForm = () => {
             <Form.Group className="mb-3" controlId="formBasicSurname">
               <Form.Label>Surname address</Form.Label>
               <Form.Control
-                type="surname"
-                placeholder="Enter surname"
-                name="surname"
-                value={surname}
+                type="email"
+                placeholder="Enter email"
+                name="email"
+                value={email}
                 onChange={handleChange}
                 required
               />
