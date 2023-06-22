@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { toast } from 'react-toastify';
 import { Form, Button } from 'react-bootstrap';
 import { Box } from 'components/Box';
 
-export const UserForm = ({ users, onSubmit }) => {
+export const VisitorForm = ({ visitors, onSubmit }) => {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [surname, setSurname] = useState('');
 
   const handleChange = e => {
     const currentInputName = e.currentTarget.name;
@@ -15,11 +13,8 @@ export const UserForm = ({ users, onSubmit }) => {
       case 'name':
         setName(e.currentTarget.value);
         break;
-      case 'email':
-        setEmail(e.currentTarget.value);
-        break;
-      case 'password':
-        setPassword(e.currentTarget.value);
+      case 'surname':
+        setSurname(e.currentTarget.value);
         break;
       default:
         return;
@@ -29,18 +24,10 @@ export const UserForm = ({ users, onSubmit }) => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (users.find(user => user.email === email)) {
-      toast.warning(`${email} is already in users!`, {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-      return false;
-    }
-
-    onSubmit({ name, email, password });
+    onSubmit({ name, surname });
 
     setName('');
-    setEmail('');
-    setPassword('');
+    setSurname('');
   };
 
   return (
@@ -55,19 +42,19 @@ export const UserForm = ({ users, onSubmit }) => {
             onChange={handleChange}
             pattern="^[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]+(([' -][a-zA-Zа-яА-Яа-їґЄ-ЯҐ ])?[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces."
-            autoComplete='off'
+            autoComplete="off"
             required
           />
         </Form.Group>
-        <Form.Group className="mb-2" controlId="formBasicEmail">
+        <Form.Group className="mb-2" controlId="formBasicSurname">
           <Form.Label>Surname</Form.Label>
           <Form.Control
             type="text"
             name="surname"
-            value={email}
+            value={surname}
             onChange={handleChange}
             pattern="^[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]+(([' -][a-zA-Zа-яА-Яа-їґЄ-ЯҐ ])?[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]*)*$"
-            autoComplete='off'
+            autoComplete="off"
             required
           />
         </Form.Group>
@@ -79,16 +66,15 @@ export const UserForm = ({ users, onSubmit }) => {
   );
 };
 
-UserForm.propTypes = {
-  users: PropTypes.arrayOf(
+VisitorForm.propTypes = {
+  visitors: PropTypes.arrayOf(
     PropTypes.exact({
       _id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      email: PropTypes.string.isRequired,
-      password: PropTypes.string.isRequired,
+      surname: PropTypes.string.isRequired,
       owner: PropTypes.exact({
         _id: PropTypes.string.isRequired,
-        email: PropTypes.string.isRequired,
+        email: PropTypes.string,
       }),
     })
   ).isRequired,

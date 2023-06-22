@@ -13,7 +13,7 @@ import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 const RegisterView = lazy(() => import('pages/RegisterView'));
 const LoginView = lazy(() => import('pages/LoginView'));
-const UsersView = lazy(() => import('pages/UsersView'));
+const VisitorsView = lazy(() => import('pages/VisitorsView'));
 
 export const App = () => {
   const isRefreshingUser = useSelector(authSelectors.getIsRefreshingUser);
@@ -40,7 +40,7 @@ export const App = () => {
               element={
                 <PublicRoute
                   restricted
-                  redirectTo="/users"
+                  redirectTo="/visitors"
                   component={<RegisterView />}
                 />
               }
@@ -50,7 +50,7 @@ export const App = () => {
               element={
                 <PublicRoute
                   restricted
-                  redirectTo="/users"
+                  redirectTo="/visitors"
                   component={<RegisterView />}
                 />
               }
@@ -60,15 +60,15 @@ export const App = () => {
               element={
                 <PublicRoute
                   restricted
-                  redirectTo="/users"
+                  redirectTo="/visitors"
                   component={<LoginView />}
                 />
               }
             />
             <Route
-              path="users"
+              path="visitors"
               element={
-                <PrivateRoute redirectTo="/login" component={<UsersView />} />
+                <PrivateRoute redirectTo="/login" component={<VisitorsView />} />
               }
             />
             <Route path="*" element={<Navigate to="/" />} />

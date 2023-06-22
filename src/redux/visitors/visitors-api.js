@@ -19,61 +19,61 @@ const axiosBaseQuery =
     }
   };
 
-export const usersApi = createApi({
-  reducerPath: 'users',
+export const visitorsApi = createApi({
+  reducerPath: 'visitors',
   baseQuery: axiosBaseQuery({
     baseUrl: BASE_URL,
   }),
-  tagTypes: ['Users'],
+  tagTypes: ['Visitors'],
   endpoints(build) {
     return {
-      getAllUsers: build.query({
-        query: () => ({ url: 'users', method: 'get' }),
-        providesTags: ['Users'],
+      getAllVisitors: build.query({
+        query: () => ({ url: 'visitors', method: 'get' }),
+        providesTags: ['Visitors'],
       }),
       getById: build.query({
-        query: (userId) => ({ url: `users/${userId}`, method: 'get' }),
-        providesTags: ['Users'],
+        query: (visitorId) => ({ url: `visitors/${visitorId}`, method: 'get' }),
+        providesTags: ['Visitors'],
       }),
-      addUser: build.mutation({
-        query: ({ name, email, password }) => ({
-          url: 'users',
+      addVisitor: build.mutation({
+        query: ({ name, surname, password }) => ({
+          url: 'visitors',
           method: 'post',
           data: {
             name,
-            email,
+            surname,
             password,
           },
         }),
-        invalidatesTags: ['Users'],
+        invalidatesTags: ['Visitors'],
       }),
-      removeUser: build.mutation({
-        query: userId => ({
-          url: `users/${userId}`,
+      removeVisitor: build.mutation({
+        query: visitorId => ({
+          url: `visitors/${visitorId}`,
           method: 'delete',
         }),
-        invalidatesTags: ['Users'],
+        invalidatesTags: ['Visitors'],
       }),
-      updateUser: build.mutation({
-        query: ({ userId, name, email, password }) => ({
-          url: `users/${userId}`,
+      updateVisitor: build.mutation({
+        query: ({ visitorId, name, surname, password }) => ({
+          url: `visitors/${visitorId}`,
           method: 'put',
           data: {
             name,
-            email,
+            surname,
             password,
           },
         }),
-        invalidatesTags: ['Users'],
+        invalidatesTags: ['Visitors'],
       }),
     };
   },
 });
 
 export const {
-  useGetAllUsersQuery,
+  useGetAllVisitorsQuery,
   useGetByIdQuery,
-  useAddUserMutation,
-  useRemoveUserMutation,
-  useUpdateUserMutation,
-} = usersApi;
+  useAddVisitorMutation,
+  useRemoveVisitorMutation,
+  useUpdateVisitorMutation,
+} = visitorsApi;

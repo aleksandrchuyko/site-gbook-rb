@@ -1,4 +1,4 @@
-import UserMenu from 'components/UserMenu/UserMenu';
+import VisitorMenu from 'components/UserMenu/UserMenu';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { authSelectors } from 'redux/auth';
@@ -24,7 +24,7 @@ const SiteHeader = () => {
             </>
           )}
         </Nav>
-        {isLoggedIn && <UserMenu />}
+        {isLoggedIn && <VisitorMenu />}
       </Container>
     </Navbar>
   );

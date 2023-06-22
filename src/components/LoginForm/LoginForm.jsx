@@ -4,15 +4,15 @@ import { useDispatch } from 'react-redux';
 import { authOperations } from 'redux/auth';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 
-export const LoginForm = ({ users, onSubmit }) => {
-  const [email, setEmail] = useState('');
+export const LoginForm = () => {
+  const [surname, setSurname] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
 
   const handleChange = ({ currentTarget: { name, value } }) => {
     switch (name) {
-      case 'email':
-        setEmail(value);
+      case 'surname':
+        setSurname(value);
         break;
       case 'password':
         setPassword(value);
@@ -25,8 +25,8 @@ export const LoginForm = ({ users, onSubmit }) => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    dispatch(authOperations.logIn({ email, password }));
-    setEmail('');
+    dispatch(authOperations.logIn({ surname, password }));
+    setSurname('');
     setPassword('');
   };
 
@@ -35,14 +35,14 @@ export const LoginForm = ({ users, onSubmit }) => {
       <Row>
         <Col xs={6}>
           <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
+            <Form.Group className="mb-3" controlId="formBasicSurname">
+              <Form.Label>Surname address</Form.Label>
 
               <Form.Control
-                type="email"
-                placeholder="Enter email"
-                name="email"
-                value={email}
+                type="surname"
+                placeholder="Enter surname"
+                name="surname"
+                value={surname}
                 onChange={handleChange}
                 required
               />

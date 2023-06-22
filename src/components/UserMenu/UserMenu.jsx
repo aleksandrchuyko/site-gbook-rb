@@ -8,7 +8,7 @@ const UserMenu = () => {
   const handleLogout = () => {
     dispatch(authOperations.logOut());
   };
-  const user = useSelector(authSelectors.getUser);
+  const visitor = useSelector(authSelectors.getUser);
 
   return (
     <Box display="flex" alignItems="center">
@@ -16,10 +16,10 @@ const UserMenu = () => {
         className="text-light m-2"
         style={{ display: 'inline-block', color: '#fff' }}
       >
-        {user}
+        {visitor}
       </span>
       <Button type="button" style={{ display: 'block' }} onClick={handleLogout}>
-        Вихід
+        Logout
       </Button>
     </Box>
   );

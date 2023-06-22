@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { userlistReducer } from './userlistSlice';
+import { visitorlistReducer } from './visitorlistSlice';
 import {
   persistStore,
   persistReducer,
@@ -12,7 +12,7 @@ import {
 } from 'redux-persist';
 
 import storage from 'redux-persist/lib/storage';
-import { usersApi } from './users/users-api';
+import { visitorsApi } from './visitors/visitors-api';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { authReducer } from './auth';
 
@@ -25,8 +25,8 @@ const authPersistConfig = {
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
-    userlist: userlistReducer,
-    [usersApi.reducerPath]: usersApi.reducer,
+    visitorlist: visitorlistReducer,
+    [visitorsApi.reducerPath]: visitorsApi.reducer,
   },
   middleware(getDefaultMiddleware) {
     return [
@@ -35,7 +35,7 @@ export const store = configureStore({
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
       }),
-      usersApi.middleware,
+      visitorsApi.middleware,
     ];
   },
 });

@@ -1,9 +1,9 @@
 import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { useRemoveUserMutation } from 'redux/users/users-api';
+import { useRemoveVisitorMutation } from 'redux/visitors/visitors-api';
 
-export const User = ({ id, name, email, password, open, getUserById }) => {
-  const [removeUser, { isLoading: isDeleting }] = useRemoveUserMutation();
+export const Visitor = ({ id, name, surname, password, open, getVisitorById }) => {
+  const [removeVisitor, { isLoading: isDeleting }] = useRemoveVisitorMutation();
   return (
     <div>
       <p className="mb-2">
@@ -15,7 +15,7 @@ export const User = ({ id, name, email, password, open, getUserById }) => {
         size="sm"
         type="button"
         onClick={() => {
-          getUserById(id);
+          getVisitorById(id);
           open();
         }}
       >
@@ -27,7 +27,7 @@ export const User = ({ id, name, email, password, open, getUserById }) => {
         type="button"
         disabled={isDeleting}
         onClick={() => {
-          removeUser(id);
+          removeVisitor(id);
         }}
       >
         Видалити
@@ -36,9 +36,9 @@ export const User = ({ id, name, email, password, open, getUserById }) => {
   );
 };
 
-User.propTypes = {
+Visitor.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
+  surname: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
 };
