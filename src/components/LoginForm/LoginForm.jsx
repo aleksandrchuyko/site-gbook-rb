@@ -37,12 +37,12 @@ export const LoginForm = () => {
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicSurname">
               <Form.Label>Email address</Form.Label>
-
               <Form.Control
                 type="email"
                 placeholder="Enter email"
                 name="email"
                 value={email}
+                pattern="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"
                 onChange={handleChange}
                 required
               />
@@ -55,6 +55,7 @@ export const LoginForm = () => {
                 name="password"
                 value={password}
                 onChange={handleChange}
+                minLength={"8"}
                 required
               />
             </Form.Group>

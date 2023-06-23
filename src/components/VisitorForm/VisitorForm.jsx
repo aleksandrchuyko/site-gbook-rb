@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
+
 import { Form, Button } from 'react-bootstrap';
 import { Box } from 'components/Box';
 
-export const VisitorForm = ({ visitors, onSubmit }) => {
+export const VisitorForm = ({ onSubmit }) => {
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
 
@@ -40,7 +40,7 @@ export const VisitorForm = ({ visitors, onSubmit }) => {
             name="name"
             value={name}
             onChange={handleChange}
-            pattern="^[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]+(([' -][a-zA-Zа-яА-Яа-їґЄ-ЯҐ ])?[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]*)*$"
+            pattern="^[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]+(?:-[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]+)*$"
             title="Name may contain only letters, apostrophe, dash and spaces."
             autoComplete="off"
             required
@@ -53,7 +53,7 @@ export const VisitorForm = ({ visitors, onSubmit }) => {
             name="surname"
             value={surname}
             onChange={handleChange}
-            pattern="^[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]+(([' -][a-zA-Zа-яА-Яа-їґЄ-ЯҐ ])?[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]*)*$"
+            pattern="^[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]+(?:-[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]+)*$"
             autoComplete="off"
             required
           />
@@ -64,18 +64,4 @@ export const VisitorForm = ({ visitors, onSubmit }) => {
       </Form>
     </Box>
   );
-};
-
-VisitorForm.propTypes = {
-  visitors: PropTypes.arrayOf(
-    PropTypes.exact({
-      _id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      surname: PropTypes.string.isRequired,
-      owner: PropTypes.exact({
-        _id: PropTypes.string.isRequired,
-        email: PropTypes.string,
-      }),
-    })
-  ).isRequired,
 };

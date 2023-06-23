@@ -63,7 +63,6 @@ const VisitorsView = () => {
   //------------------
 
   const filteredVisitors = getFilteredVisitors();
-  //console.log(filteredVisitors);
 
   return (
     <Container
@@ -86,7 +85,10 @@ const VisitorsView = () => {
           <Card>
             <Card.Body>
               <Card.Title>New visitor</Card.Title>
-              <VisitorForm visitors={visitors} onSubmit={handleAddVisitor}></VisitorForm>
+              <VisitorForm
+                visitors={visitors}
+                onSubmit={handleAddVisitor}
+              ></VisitorForm>
             </Card.Body>
           </Card>
           <Card>

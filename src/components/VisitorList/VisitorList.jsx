@@ -1,4 +1,4 @@
-import { Visitor } from 'components/VisitorList/Visitor/Visitor';
+import { VisitorActions } from 'components/VisitorList/VisitorActions/VisitorActions';
 import PropTypes from 'prop-types';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -26,6 +26,10 @@ export const VisitorList = ({ visitors, open, getVisitorById }) => {
       text: 'Date of visit',
       sort: true,
     },
+    {
+      dataField: 'action',
+      text: 'Actions',
+    },
   ];
 
   const data = visitors.map(visitor => {
@@ -33,7 +37,12 @@ export const VisitorList = ({ visitors, open, getVisitorById }) => {
       id: visitor._id,
       name: visitor.name,
       surname: visitor.surname,
-      createdAt: visitor.createdAt,
+      createdAt: (new Date(visitor.createdAt)).toLocaleString(),
+      action: (<VisitorActions
+              id={visitor._id}
+              open={open}
+              getVisitorById={getVisitorById}
+            ></VisitorActions>)
     };
   });
 
@@ -67,7 +76,7 @@ VisitorList.propTypes = {
       createdAt: PropTypes.string.isRequired,
       owner: PropTypes.exact({
         _id: PropTypes.string.isRequired,
-        surname: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
       }),
     })
   ).isRequired,

@@ -43,6 +43,7 @@ export const RegisterForm = () => {
                 placeholder="Enter email"
                 name="email"
                 value={email}
+                pattern="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"
                 onChange={handleChange}
                 required
               />
@@ -55,6 +56,7 @@ export const RegisterForm = () => {
                 name="password"
                 value={password}
                 onChange={handleChange}
+                minLength={"8"}
                 required
               />
             </Form.Group>

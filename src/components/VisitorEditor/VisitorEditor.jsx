@@ -48,7 +48,7 @@ export const VisitorEditor = ({ visitor, onSubmit, close }) => {
               name="name"
               value={name}
               onChange={handleChange}
-              pattern="^[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]+(([' -][a-zA-Zа-яА-Яа-їґЄ-ЯҐ ])?[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]*)*$"
+              pattern="^[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]+(?:-[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]+)*$"
               title="Name may contain only letters, apostrophe, dash and spaces."
               autoComplete="off"
               required
@@ -61,7 +61,7 @@ export const VisitorEditor = ({ visitor, onSubmit, close }) => {
               name="surname"
               value={surname}
               onChange={handleChange}
-              pattern="^[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]+(([' -][a-zA-Zа-яА-Яа-їґЄ-ЯҐ ])?[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]*)*$"
+              pattern="^[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]+(?:-[a-zA-Zа-яА-Яа-їґЄ-ЯҐ]+)*$"
               autoComplete="off"
               required
             />
