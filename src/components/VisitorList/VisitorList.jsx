@@ -49,20 +49,6 @@ export const VisitorList = ({ visitors, open, getVisitorById }) => {
   return (
     <VisitorContainer>
       <BootstrapTable keyField="id" data={data} columns={columns} />
-      {/* <ListGroup variant="flush">
-        {visitors.map(visitor => (
-          <ListGroup.Item key={visitor._id}>
-            <Visitor
-              id={visitor._id}
-              name={visitor.name}
-              surname={visitor.surname}
-              password={visitor.password}
-              open={open}
-              getVisitorById={getVisitorById}
-            ></Visitor>
-          </ListGroup.Item>
-        ))}
-      </ListGroup> */}
     </VisitorContainer>
   );
 };
