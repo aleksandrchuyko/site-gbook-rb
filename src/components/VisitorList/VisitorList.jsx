@@ -37,12 +37,14 @@ export const VisitorList = ({ visitors, open, getVisitorById }) => {
       id: visitor._id,
       name: visitor.name,
       surname: visitor.surname,
-      createdAt: (new Date(visitor.createdAt)).toLocaleString(),
-      action: (<VisitorActions
-              id={visitor._id}
-              open={open}
-              getVisitorById={getVisitorById}
-            ></VisitorActions>)
+      createdAt: new Date(visitor.createdAt).toLocaleString(),
+      action: (
+        <VisitorActions
+          id={visitor._id}
+          open={open}
+          getVisitorById={getVisitorById}
+        ></VisitorActions>
+      ),
     };
   });
 
