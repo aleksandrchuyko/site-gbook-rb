@@ -2,7 +2,7 @@
   "name": "site-gbook",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://aleksandrchuyko.github.io/site-gbook/",
+  "homepage": "https://aleksandrchuyko.github.io/site-gbook-rb/",
   "dependencies": {
     "@mui/material": "^5.10.4",
     "@mui/styled-engine-sc": "^5.10.3",
