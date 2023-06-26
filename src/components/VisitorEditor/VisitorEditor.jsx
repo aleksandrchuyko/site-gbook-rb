@@ -1,8 +1,7 @@
-// import { Box } from 'components/Box';
 import { useState } from 'react';
 import { Card, CardGroup, Button, Form } from 'react-bootstrap';
 
-export const VisitorEditor = ({ visitor, onSubmit, close }) => {
+export const VisitorEditor = ({ visitor, onSubmit, closeEditor }) => {
   const [name, setName] = useState(visitor.name);
   const [surname, setSurname] = useState(visitor.surname);
 
@@ -27,7 +26,7 @@ export const VisitorEditor = ({ visitor, onSubmit, close }) => {
 
     setName('');
     setSurname('');
-    close();
+    closeEditor();
   };
   return (
     <CardGroup
@@ -74,7 +73,7 @@ export const VisitorEditor = ({ visitor, onSubmit, close }) => {
             style={{ marginLeft: '30px' }}
             type="button"
             onClick={() => {
-              close();
+              closeEditor();
             }}
           >
             Cancel

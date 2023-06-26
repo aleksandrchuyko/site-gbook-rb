@@ -4,6 +4,7 @@ import { VisitorForm } from 'components/VisitorForm/VisitorForm';
 import { VisitorList } from 'components/VisitorList/VisitorList';
 import { Filter } from 'components/Filter/Filter';
 import { VisitorEditor } from 'components/VisitorEditor/VisitorEditor';
+import { Confirm } from 'components/Confirm/Confirm';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { getFilter, setFilter } from 'redux/visitorlistSlice';
@@ -12,6 +13,7 @@ import {
   useAddVisitorMutation,
   useGetAllVisitorsQuery,
   useUpdateVisitorMutation,
+  useRemoveVisitorMutation,
 } from 'redux/visitors/visitors-api';
 import { Card, CardGroup, Container } from 'react-bootstrap';
 
@@ -20,7 +22,17 @@ import { useToggle } from 'hooks/useToggle';
 const VisitorsView = () => {
   const dispatch = useDispatch();
   const [visitor, setVisitor] = useState({});
-  const { isOpen, open, close } = useToggle();
+
+  const {
+    isOpen: isOpenEditor,
+    open: openEditor,
+    close: closeEditor,
+  } = useToggle();
+  const {
+    isOpen: isOpenConfirm,
+    open: openConfirm,
+    close: closeConfirm,
+  } = useToggle();
 
   const filter = useSelector(getFilter);
   const {
@@ -30,6 +42,8 @@ const VisitorsView = () => {
   } = useGetAllVisitorsQuery('', {
     refetchOnMountOrArgChange: true,
   });
+
+  const [removeVisitor] = useRemoveVisitorMutation();
 
   const [addVisitor] = useAddVisitorMutation();
 
@@ -57,6 +71,14 @@ const VisitorsView = () => {
     updateVisitor({ visitorId: id, name, surname, password });
   };
 
+  const handleDelete = () => {
+    openConfirm();
+  };
+
+  const handleRemoveVisitor = () => {
+    removeVisitor(visitor._id);
+  };
+
   const updateFilter = e => {
     dispatch(setFilter(e.target.value));
   };
@@ -71,12 +93,18 @@ const VisitorsView = () => {
         position: 'relative',
       }}
     >
-      {isOpen && (
+      {isOpenEditor && (
         <VisitorEditor
-          visitors={visitors}
           visitor={visitor}
-          close={close}
+          closeEditor={closeEditor}
           onSubmit={handleUpdateVisitor}
+        />
+      )}
+      {isOpenConfirm && (
+        <Confirm
+          visitor={visitor}
+          closeConfirm={closeConfirm}
+          onSubmit={handleRemoveVisitor}
         />
       )}
 
@@ -97,8 +125,9 @@ const VisitorsView = () => {
               <Filter name={filter} onChange={updateFilter}></Filter>
               <VisitorList
                 visitors={filteredVisitors}
-                open={open}
+                openEditor={openEditor}
                 getVisitorById={getVisitorById}
+                handleDelete={handleDelete}
               />
             </Card.Body>
           </Card>

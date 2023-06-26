@@ -4,7 +4,7 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import BootstrapTable from 'react-bootstrap-table-next';
 import { VisitorContainer } from './VisitorList.styled';
 
-export const VisitorList = ({ visitors, open, getVisitorById }) => {
+export const VisitorList = ({ visitors, openEditor, getVisitorById, handleDelete }) => {
   const columns = [
     {
       dataField: 'id',
@@ -41,8 +41,10 @@ export const VisitorList = ({ visitors, open, getVisitorById }) => {
       action: (
         <VisitorActions
           id={visitor._id}
-          open={open}
+          openEditor={openEditor}
           getVisitorById={getVisitorById}
+          handleDelete={handleDelete}
+
         ></VisitorActions>
       ),
     };

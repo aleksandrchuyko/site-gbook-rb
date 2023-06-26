@@ -2,8 +2,8 @@ import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { useRemoveVisitorMutation } from 'redux/visitors/visitors-api';
 
-export const VisitorActions = ({ id, open, getVisitorById }) => {
-  const [removeVisitor, { isLoading: isDeleting }] = useRemoveVisitorMutation();
+export const VisitorActions = ({ id, openEditor, getVisitorById, handleDelete }) => {
+  const [{ isLoading: isDeleting }] = useRemoveVisitorMutation();
   return (
     <div>
       <Button
@@ -12,7 +12,7 @@ export const VisitorActions = ({ id, open, getVisitorById }) => {
         type="button"
         onClick={() => {
           getVisitorById(id);
-          open();
+          openEditor();
         }}
       >
         Edit
@@ -23,7 +23,9 @@ export const VisitorActions = ({ id, open, getVisitorById }) => {
         type="button"
         disabled={isDeleting}
         onClick={() => {
-          removeVisitor(id);
+          getVisitorById(id);
+          handleDelete();
+          //removeVisitor(id);
         }}
       >
         Delete
